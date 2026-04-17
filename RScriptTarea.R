@@ -3,8 +3,8 @@
 carpetas = list.files("Entregas", full.names=T)
 archivos = list.files("Entregas", recursive = T, full.names = T)
 
-puntos = archivos[grepl("\\.txt$", archivos, ignore.case = T)]
-certificados = archivos[grepl("\\.(pdf|jpg|png)$", archivos, ignore.case = TRUE)]
+puntos = archivos[grepl("puntos.*\\.txt$|Score2.pdf|6950.txt|points_intermediate.txt|dtapoint.txt|puntosintermediate.pdf", archivos, ignore.case = T)]
+certificados = archivos[grepl("\\.(pdf|jpg|png)$", archivos, ignore.case = T) & !(archivos %in% puntos)]
 
 apellidos = c()
 

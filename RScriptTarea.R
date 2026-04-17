@@ -31,7 +31,7 @@ for(i in 1:length(puntos)){
   limpio = gsub(",", ".", limpio)
   if(nchar(limpio) > 4 && grepl("\\.", limpio)){
     
-  limpio = gsub("\\.", "", limpio)}
+    limpio = gsub("\\.", "", limpio)}
   
   puntuaciones = c(puntuaciones, as.numeric(limpio))
   
@@ -44,6 +44,7 @@ for(i in 1:length(puntos)){
   apellido = strsplit(carpeta_alumno, ",")[[1]][1]
   apellidos_puntos = c(apellidos_puntos, apellido)
 }
+
 
 unique(nombres_archivo)
 #Hay un total de 16 nombres distintos para archivos de puntos.

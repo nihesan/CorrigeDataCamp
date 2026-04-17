@@ -50,9 +50,19 @@ unique(nombres_archivo)
 #Hay un total de 16 nombres distintos para archivos de puntos.
 
 evalua_df = data.frame(apellidos = apellidos_puntos, puntos = puntuaciones,NomFile = nombres_archivo, Puntos = contenido_txt,stringsAsFactors = F)
+evalua_df$puntos[evalua_df$puntos < 100] = NA
 #Para añadir a los faltantes:
 faltantes = apellidos[!(apellidos %in% apellidos_puntos)]
 filas_faltantes = data.frame(apellidos = faltantes,puntos = NA,NomFile = NA,Puntos = "No entregado",stringsAsFactors = F)
 evalua_df = rbind(evalua_df, filas_faltantes)
 library(dplyr)
 evalua_df = evalua_df %>% arrange(apellidos)
+
+library(readxl)
+library(openxlsx)
+alumnos_matriculados = read_excel("AlumnosTD25_26.xlsx")
+
+AlumnosNotas = alumnos_matriculados %>% left_join(evalua_df, by = c("Apellido(s)" = "apellidos"))
+
+write.xlsx(AlumnosNotas, "AlumnosNotas.xlsx")
+write.xlsx(evalua_df, "NotasRIntermedio.xlsx")

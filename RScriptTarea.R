@@ -47,3 +47,11 @@ for(i in 1:length(puntos)){
 
 unique(nombres_archivo)
 #Hay un total de 16 nombres distintos para archivos de puntos.
+
+evalua_df = data.frame(apellidos = apellidos_puntos, puntos = puntuaciones,NomFile = nombres_archivo, Puntos = contenido_txt,stringsAsFactors = F)
+#Para añadir a los faltantes:
+faltantes = apellidos[!(apellidos %in% apellidos_puntos)]
+filas_faltantes = data.frame(apellidos = faltantes,puntos = NA,NomFile = NA,Puntos = "No entregado",stringsAsFactors = F)
+evalua_df = rbind(evalua_df, filas_faltantes)
+library(dplyr)
+evalua_df = evalua_df %>% arrange(apellidos)
